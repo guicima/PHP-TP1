@@ -13,14 +13,27 @@ function createNavbar(array $navbar_items, string $currentpage): string
     return implode($menu);
 }
 
-function countVisits()
+//Counting system
+function incrementFile(string $file): void
 {
-    $counter_file = 'data' . DIRECTORY_SEPARATOR . 'counter.txt';
-    if (file_exists($counter_file)) {
-        $counts = (int)file_get_contents($counter_file);
+    $counts = 1;
+    if (file_exists($file)) {
+        $counts = (int)file_get_contents($file);
         $counts++;
-        file_put_contents($counter_file, $counts);
-    } else {
-        file_put_contents($counter_file, '1');
     }
+    file_put_contents($file, $counts);
+}
+
+function countVisits(): void
+{
+    //total count
+    $counter_file = 'data' . DIRECTORY_SEPARATOR . 'counter';
+    //daily count
+    $daily_counter_file = $counter_file . '-' . date('Y-m-d');
+    incrementFile($counter_file);
+    incrementFile($daily_counter_file);
+}
+function readVisits(): string
+{
+    return file_get_contents('data' . DIRECTORY_SEPARATOR . 'counter');
 }

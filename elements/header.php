@@ -1,8 +1,14 @@
 <?php
+/*Avoid same user increasing number in one visit
+
 if (empty($_COOKIE['visit'])) {
     countVisits();
     setcookie('visit', true);
 }
+
+*/
+
+countVisits();
 
 
 $menu = [
