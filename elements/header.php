@@ -1,4 +1,7 @@
 <?php
+require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'config.php';
+require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'functions.php';
+
 /*Avoid same user increasing number in one visit
 
 if (empty($_COOKIE['visit'])) {
@@ -13,8 +16,9 @@ countVisits();
 
 $menu = [
     'Home' => 'index.php',
+    'Dashboard' => 'dashboard.php',
     'About' => 'about.php',
-    'Contact' => 'contact.php',
+    'Contact' => 'contact.php'
 ]
 ?>
 <!DOCTYPE html>

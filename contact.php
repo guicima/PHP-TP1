@@ -1,6 +1,5 @@
 <?php
 $title = 'Contact';
-require 'functions.php';
 require 'elements' . DIRECTORY_SEPARATOR . 'header.php';
 ?>
 <h1><?= $title ?></h1>
