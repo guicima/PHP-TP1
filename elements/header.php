@@ -17,6 +17,7 @@ countVisits();
 $menu = [
     'Home' => 'index.php',
     'Dashboard' => 'dashboard.php',
+    'Dashboard - 2' => 'dashboard2.php',
     'About' => 'about.php',
     'Contact' => 'contact.php'
 ]

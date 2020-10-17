@@ -38,7 +38,7 @@ function readVisits(): string
     return file_get_contents('data' . DIRECTORY_SEPARATOR . 'counter');
 }
 
-function readAndCountByMonth(int $month, int $year): int
+function readAndCountByMonth(string $month, int $year): int
 {
     $views = 0;
     foreach (glob('data' . DIRECTORY_SEPARATOR . "counter-$year-$month-*") as $file) {
@@ -46,6 +46,9 @@ function readAndCountByMonth(int $month, int $year): int
     }
     return $views;
 }
+
+
+//Dashboard
 
 function dashboardButtons(array $ensemble, int $parent): string
 {
@@ -61,7 +64,6 @@ function dashboardDisplay(array $ensemble, int $parent): string
 {
     //$result[] = "<div class=\"tab-content\" id=\"v-pills-tabContent\">";
     foreach ($ensemble as $key => $item) {
-        $key++;
         $result[] = "<div class=\"tab-pane fade\" id=\"v-pills-$item$parent\" role=\"tabpanel\" aria-labelledby=\"v-pills-$item$parent-tab\">Nombre total de visites: " . readVisits() . "</br>Nombre de visites pour le mois de $item $parent: " . readAndCountByMonth($key, $parent) . "</div>";
     }
     //$result[] = "</div>";
@@ -96,4 +98,29 @@ function buildDashboard(array $ensemble, int $parent): string
     $result[] = "</div>";
     $button[] = "</div>";
     return implode($button) . implode($result) . implode($display);
+}
+
+
+
+
+//new dashboard
+
+function yearDashboardButtons(int $year, int $selectedYear): string
+{
+    for ($i = 0; $i < 5; $i++) {
+        $showYear = $year - $i;
+        $active = $showYear === $selectedYear ? 'active' : '';
+        $result[] = "<a class=\"btn btn-outline-primary btn-block $active\" href=\"?annee=$showYear\">$showYear</a>";
+    }
+    return implode($result);
+}
+
+function monthDashboardButtons(array $months, int $year, string $currentMonth, int $currentYear, string $selectedMonth): string
+{
+    foreach ($months as $key => $month) {
+        $active = $key == $selectedMonth ? 'active' : '';
+        $disabled = $year === $currentYear && (int)$key > (int)$currentMonth ? 'disabled' : '';
+        $result[] = "<a class=\"btn btn-outline-primary btn-block $disabled $active\" href=\"?annee=$year&mois=$key\">$month</a>";
+    }
+    return implode($result);
 }
