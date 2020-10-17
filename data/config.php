@@ -13,3 +13,14 @@ define('MONTHS', [
     '11' => 'Novembre',
     '12' => 'Decembre'
 ]);
+
+define('USERS', [
+    [
+        'email' => 'cimabatista@gmail.com',
+        'password' => '1234567'
+    ],
+    [
+        'email' => 'junko@gmail.com',
+        'password' => '7654321'
+    ]
+]);

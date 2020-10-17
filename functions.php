@@ -42,7 +42,22 @@ function readAndCountByMonth(string $month, int $year): int
 {
     $views = 0;
     foreach (glob('data' . DIRECTORY_SEPARATOR . "counter-$year-$month-*") as $file) {
-        $views = +file_get_contents($file);
+        $views += file_get_contents($file);
+    }
+    return $views;
+}
+
+function readAndDetailMonth(string $month, int $year): array
+{
+    $views = [];
+    foreach (glob('data' . DIRECTORY_SEPARATOR . "counter-$year-$month-*") as $file) {
+        $data = explode("-", basename($file));
+        $views[] = [
+            'année' => $data[1],
+            'mois' => $data[2],
+            'jour' => $data[3],
+            'vues' => (int)file_get_contents($file)
+        ];
     }
     return $views;
 }
@@ -123,4 +138,35 @@ function monthDashboardButtons(array $months, int $year, string $currentMonth, i
         $result[] = "<a class=\"btn btn-outline-primary btn-block $disabled $active\" href=\"?annee=$year&mois=$key\">$month</a>";
     }
     return implode($result);
+}
+
+
+/* Unused (messier; build directly in html)
+function buildMonthStats(array $mois): string
+{
+    $stats = [];
+    foreach ($mois as $data) {
+        $jour = $data['jour'];
+        $mois = $data['mois'];
+        $annee = $data['année'];
+        $vues = $data['vues'];
+        $stats[] = "<tr><td>$jour</td><td>" . MONTHS[$mois] . "</td><td>$annee</td><td>$vues vues</td></tr>";
+    }
+    return implode($stats);
+}
+*/
+
+function connection(string $username, string $password): int //-0 access granted -1 password incorrect -2 email incorrect
+{
+    if (in_array($username, array_column(USERS, 'email'))) {
+        $key = array_search($username, array_column(USERS, 'email'));
+        $credentials = USERS[$key];
+        if ($username === $credentials['email'] && $password === $credentials['password']) {
+            return 0;
+        } elseif ($username === $credentials['email'] && $password !== $credentials['password']) {
+            return 1;
+        }
+    } else {
+        return 2;
+    }
 }

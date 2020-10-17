@@ -1,6 +1,6 @@
 <?php
-require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'config.php';
-require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'functions.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'config.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'functions.php';
 
 /*Avoid same user increasing number in one visit
 
@@ -17,7 +17,6 @@ countVisits();
 $menu = [
     'Home' => 'index.php',
     'Dashboard' => 'dashboard.php',
-    'Dashboard - 2' => 'dashboard2.php',
     'About' => 'about.php',
     'Contact' => 'contact.php'
 ]
