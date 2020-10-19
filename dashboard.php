@@ -3,11 +3,6 @@ require 'elements' . DIRECTORY_SEPARATOR . 'auth.php';
 forceConnection();
 $title = 'Dashboard';
 
-if ($_GET['deconnection'] === 'true') {
-    unset($_SESSION['role']);
-    forceConnection();
-}
-
 require 'elements' . DIRECTORY_SEPARATOR . 'header.php';
 $currentYear = date("Y");
 $currentMonth = date("m");
@@ -68,7 +63,7 @@ $monthlyViews = readAndCountByMonth($selectedMonth, $selectedYear);
 
         </div>
         <div class="col-sm-2">
-            <a class="btn btn-outline-primary btn-block" href="?deconnection=true">Se deconnecter</a>
+            <a class="btn btn-outline-primary btn-block" href="/logout.php">Se deconnecter</a>
         </div>
     </div>
 </div>

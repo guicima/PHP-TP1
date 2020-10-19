@@ -6,6 +6,10 @@ $password = $_POST['password'];
 $connectionError = null;
 require_once 'data' . DIRECTORY_SEPARATOR . 'config.php';
 require_once 'functions.php';
+require_once 'elements' . DIRECTORY_SEPARATOR . 'auth.php';
+if (isConnected()) {
+    header('Location: /dashboard.php');
+}
 
 if (!empty($_POST)) {
     if (connection($email, $password) === 0) {

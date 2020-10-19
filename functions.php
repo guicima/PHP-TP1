@@ -161,9 +161,9 @@ function connection(string $username, string $password): int //-0 access granted
     if (in_array($username, array_column(USERS, 'email'))) {
         $key = array_search($username, array_column(USERS, 'email'));
         $credentials = USERS[$key];
-        if ($username === $credentials['email'] && $password === $credentials['password']) {
+        if ($username === $credentials['email'] && password_verify($password, $credentials['password'])) {
             return 0;
-        } elseif ($username === $credentials['email'] && $password !== $credentials['password']) {
+        } elseif ($username === $credentials['email'] && !password_verify($password, $credentials['password'])) {
             return 1;
         }
     } else {

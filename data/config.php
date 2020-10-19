@@ -17,10 +17,10 @@ define('MONTHS', [
 define('USERS', [
     [
         'email' => 'cimabatista@gmail.com',
-        'password' => '1234567'
+        'password' => '$2y$10$.8PTHQZIZO/43RS/nrHfVu/78.39.psTljbNl0LuBKt2tirPcLrDe'
     ],
     [
         'email' => 'junko@gmail.com',
-        'password' => '7654321'
+        'password' => '$2y$10$cJne/t7S4Fi.Y61kwmKvgO0FuHhrbkK0dayVedENtGth8x8qrD/C2'
     ]
 ]);
